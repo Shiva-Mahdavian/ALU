@@ -4,25 +4,21 @@
 
 
 
-module ALU
-	#(
-		parameter nIO = 8,
-		parameter nOP = 3
-	)
-	(
-		input signed [nIO-1:0] A,
-		input signed [nIO-1:0] B,
-		input [nOP-1:0] OP,
-		output signed [nIO-1:0] Z,
-		output OV
-	);
+module ALU( A, B, OP, Z, OV);
 	
-	wire [nIO-1:0] add;
-	wire [nIO-1:0] sub;
-	wire [nIO-1:0] max;
-	wire [nIO-1:0] min;
-	wire [nIO-1:0] leftShift;
-	wire [nIO-1:0] rightShift;
+	input [8-1:0] A;
+	input [8-1:0] B;
+	input [3-1:0] OP;
+	output [8-1:0] Z;
+	output OV;
+	
+	
+	wire [8-1:0] add;
+	wire [8-1:0] sub;
+	wire [8-1:0] max;
+	wire [8-1:0] min;
+	wire [8-1:0] leftShift;
+	wire [8-1:0] rightShift;
 	wire OVAdd;
 	wire OVSub;
 	

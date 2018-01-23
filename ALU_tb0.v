@@ -1,4 +1,4 @@
-`include "ALU.v"
+//`include "ALU.v"
 
 `timescale 1ns/1ns
 
@@ -25,15 +25,20 @@ module ALU_tb0 ;
 	);
 	
 	initial
-		for ( i = 0; i < num_tests; i = i + 1 )
 		begin
-			A = $random;
-			B = $random;
+		$dumpfile("tb0.vcd");
+	        $dumpvars(0, A, B, res, ovrflow);
+		for ( i = 0; i < num_tests; i = i + 1 )
+			begin
+				#5 A = $random;
+				#5 B = $random;
 			
-			#10;
+				#20;
 				
 	
-			$display("%b (%d) + %b (%d) = %b (%d), %0s", A, A, B, B, res, res, !uut.OV ? "OK" : "Overflown");
-			#3;	
+				$monitor("%b (%d) + %b (%d) = %b (%d), overflow = %b", A, A, B, B, res, res, ovrflow);
+				#5;	
+			end
+		#15 $finish;
 		end
 endmodule

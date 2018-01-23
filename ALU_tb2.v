@@ -1,4 +1,4 @@
-`include "ALU.v"
+//`include "ALU.v"
 
 `timescale 1ns/1ns
 
@@ -25,15 +25,19 @@ module ALU_tb2 ;
 	);
 	
 	initial
-		for ( i = 0; i < num_tests; i = i + 1 )
 		begin
-			A = $random;
-			B = $random;
+		$dumpfile("tb2.vcd");
+	        $dumpvars(0, A, B, res);
+		for ( i = 0; i < num_tests; i = i + 1 )
+			begin
+				#5 A = $random;
+				#5 B = $random;
+		
+				#20;
 			
-			#10;
-				
-	
-			$display("max( %b (%d), %b (%d)) = %b (%d)", A, A, B, B, res, res);
-			#3;	
+				$monitor("max( %b (%d), %b (%d)) = %b (%d)", A, A, B, B, res, res);
+				#3;	
+			end
+		#15 $finish;
 		end
 endmodule

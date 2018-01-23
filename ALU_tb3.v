@@ -1,4 +1,4 @@
-`include "ALU.v"
+//`include "ALU.v"
 
 `timescale 1ns/1ns
 
@@ -25,15 +25,19 @@ module ALU_tb3 ;
 	);
 	
 	initial
-		for ( i = 0; i < num_tests; i = i + 1 )
 		begin
-			A = $random;
-			B = $random;
+		$dumpfile("tb3.vcd");
+	        $dumpvars(0, A, B, res);
+		for ( i = 0; i < num_tests; i = i + 1 )
+			begin
+			#5 A = $random;
+			#5 B = $random;
 			
-			#10;
+			#20;
 				
 	
-			$display("min( %b (%d), %b (%d)) = %b (%d)", A, A, B, B, res, res);
-			#3;	
+			$monitor("min( %b (%d), %b (%d)) = %b (%d)", A, A, B, B, res, res);	
+			end
+		#30$finish;
 		end
 endmodule

@@ -1,4 +1,4 @@
-`include "ALU.v"
+//`include "ALU.v"
 
 `timescale 1ns/1ns
 
@@ -24,15 +24,20 @@ module ALU_tb4 ;
 	);
 	
 	initial
-		for ( i = 0; i < num_tests; i = i + 1 )
 		begin
-			A = $random;
+		$dumpfile("tb4.vcd");
+	        $dumpvars(0, A, res);
+		for ( i = 0; i < num_tests; i = i + 1 )
+			begin
+				#5 A = $random;
 			
 			
-			#10;
+				#10;
 				
 	
-			$display("shifted to left : %b (%d) => %b (%d)", A, A, res, res);
-			#3;	
+				$monitor("shifted to left : %b (%d) => %b (%d)", A, A, res, res);
+				#3;	
+			end
+		#15 $finish;
 		end
 endmodule
